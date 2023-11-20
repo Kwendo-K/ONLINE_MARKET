@@ -1,0 +1,50 @@
+{% extends 'core/base.html' %}
+
+{% block title %}{{item.name}}{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <p>Item html file</p>
+                <div class="row justify-content-evenly">
+                    <div class="col-sm-3 rounded">
+                        <img src="{{item.image.url}}" alt=""  class="rounded" style="width: 30rem; height: 20rem;">
+                    </div>
+
+                    <div class="col-sm-3 bg-light rounded">
+                        <h4 class="mb-3 pb-3">{{item.name}}</h4>
+                        <p class="text-secondary"><strong>Price: ksh</strong> {{item.price}}</p>
+                        <p class="text-secondary"><strong>Seller:</strong> {{item.created_by.username}}</p>
+                        {% if item.description %}
+                            <p class="text-secondary">
+                                <strong>Description:</strong><br>
+                                {{item.description}}
+                            </p>
+                        {% endif %}
+                        <a href="" class="text-decoration-none btn btn-primary">Purchase</a>
+                        <a href="" class="text-decoration-none btn btn-success">Contact seller</a>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="row justify-content-start m-3">
+            <h4 class="m-2 text-center">Related Items</h4>
+            {% for item in related_items %}
+                <div class="col-sm-3 bg-light rounded">
+                    <a href="{% url 'view_item' item.id %}" class="link-dark text-decoration-none rounded">
+                        <div class="bg-white rounded shadow px-2 py-2">
+                            <img src="{{item.image.url}}" alt="" style="width: 20rem; height: 15rem;">
+                            <p class="fs-4">{{item.name}}</p>
+                            <p class="fs-6">Price: {{item.price}}</p>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

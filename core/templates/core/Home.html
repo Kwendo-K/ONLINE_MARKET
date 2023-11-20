@@ -1,0 +1,38 @@
+{% extends 'core/Base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="col">
+            <div class="row justify-content-evenly">
+                <h4 class="m-2 text-center">Newest Items</h4>
+                {% for item in items %}
+                    <div class="col-sm-3 bg-light rounded mb-3">
+                        <a href="{% url 'view_item' item.id %}" class="link-dark text-decoration-none rounded">
+                            <div class="bg-white rounded shadow px-2 py-2">
+                                <img src="{{item.image.url}}" alt="" style="width: 20rem; height: 15rem;">
+                                <p class="fs-4">{{item.name}}</p>
+                                <p class="fs-6">Price: {{item.price}}</p>
+                            </div>
+                        </a>
+                    </div><br>
+                {% endfor %}
+            </div>
+
+            <div class="row justify-content-evenly">
+                <h4 class="m-2 text-center">Categories</h4>
+                {% for category in categories %}
+                    <div class="col-sm-3 pb-2 bg-light rounded">
+                        <a href="" class="link-dark text-decoration-none rounded">
+                            <div class="m-2 p-1 bg-white rounded-start shadow text-center">
+                                <p>{{category.name}}</p>
+                                <p class="fw-lighter">{{category.items.count}} items</p>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
